@@ -17,34 +17,41 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDetectLanguageResponse, bool, bS
 UCLASS()
 class TEXTTRANSLATION_API UDetectLanguageRequest : public UOnlineBlueprintCallProxyBase
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-	public:
-	UDetectLanguageRequest(const FObjectInitializer& ObjectInitializer);
+public:
+    UDetectLanguageRequest(const FObjectInitializer& ObjectInitializer);
 
-	UPROPERTY(BlueprintAssignable, Category = "TextTranslation")
-	FOnDetectLanguageResponse OnDetectLanguageResponse;
+    UPROPERTY(BlueprintAssignable, Category = "TextTranslation")
+    FOnDetectLanguageResponse OnDetectLanguageResponse;
 
-	UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "TextTranslation|Requests")
-	static UDetectLanguageRequest* DetectLanguageRequest(const FDetectLanguageParams Request);
+    /**
+     * @brief 
+     * @param Request request for text translation
+     * @param InKeyAPI if the API key is specified here, then it will be used in priority, otherwise the key specified in the plugin settings will be used
+     * @return UTranslateTextRequest object
+     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", AdvancedDisplay = "InKeyAPI"), Category = "TextTranslation|Requests")
+    static UDetectLanguageRequest* DetectLanguageRequest(const FDetectLanguageParams Request, const FString InKeyAPI);
 
-	virtual void Activate() override;
+    virtual void Activate() override;
 
-	private:
-	UPROPERTY()
-	FDetectLanguageParams RequestParams;
+private:
+    UPROPERTY()
+    FDetectLanguageParams RequestParams;
 
-	UPROPERTY()
-	FString Endpoint;
+    UPROPERTY()
+    FString Endpoint;
 
-	UPROPERTY()
-	FString KeyAPI;
+    UPROPERTY()
+    FString KeyAPI;
 
-	FHttpModule* Http;
+    FHttpModule* Http;
 
-	void OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bSuccessful);
+    void OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bSuccessful);
 
-	TArray<FDetectLanguages> ParseJsonDetectLanguage(TSharedPtr<FJsonObject> JsonObject, const TSharedRef<TJsonReader<>> JsonReader) const;
+    TArray<FDetectLanguages> ParseJsonDetectLanguage(TSharedPtr<FJsonObject> JsonObject, const TSharedRef<TJsonReader<>> JsonReader) const;
 
-	FGoogleTranslateError ParseJsonDetectLanguageError(TSharedPtr<FJsonObject> JsonObject, const TSharedRef<TJsonReader<>> JsonReader) const;
+    FGoogleTranslateError ParseJsonDetectLanguageError(TSharedPtr<FJsonObject> JsonObject,
+        const TSharedRef<TJsonReader<>> JsonReader) const;
 };

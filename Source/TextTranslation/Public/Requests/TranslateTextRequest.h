@@ -25,8 +25,14 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "GoogleTranslate")
     FOnTranslateTextResponse OnTranslateTextResponse;
 
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true"), Category = "GoogleTranslate|Requests")
-    static UTranslateTextRequest* TranslateTextRequest(const FTranslateTextParams Request);
+    /**
+     * @brief 
+     * @param Request request for text translation
+     * @param InKeyAPI if the API key is specified here, then it will be used in priority, otherwise the key specified in the plugin settings will be used
+     * @return UTranslateTextRequest object
+     */
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", AdvancedDisplay = "InKeyAPI"), Category = "GoogleTranslate|Requests")
+    static UTranslateTextRequest* TranslateTextRequest(const FTranslateTextParams Request, const FString InKeyAPI);
 
     virtual void Activate() override;
 
