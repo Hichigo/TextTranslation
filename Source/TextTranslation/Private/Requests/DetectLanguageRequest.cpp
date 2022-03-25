@@ -17,10 +17,15 @@ UDetectLanguageRequest::UDetectLanguageRequest(const FObjectInitializer& ObjectI
     Endpoint = Settings->GetEndpoint();
 }
 
-UDetectLanguageRequest* UDetectLanguageRequest::DetectLanguageRequest(const FDetectLanguageParams Request)
+UDetectLanguageRequest* UDetectLanguageRequest::DetectLanguageRequest(const FDetectLanguageParams Request, const FString InKeyAPI)
 {
     UDetectLanguageRequest* Proxy = NewObject<UDetectLanguageRequest>();
     Proxy->RequestParams = Request;
+
+    if (!InKeyAPI.IsEmpty())
+    {
+        Proxy->KeyAPI = InKeyAPI;
+    }
 
     return Proxy;
 }
@@ -117,7 +122,7 @@ FGoogleTranslateError UDetectLanguageRequest::ParseJsonDetectLanguageError(TShar
 
         Error.Code = ErrorData->GetNumberField("code");
         Error.Message = ErrorData->GetStringField("message");
-        Error.Status = ErrorData->GetStringField("status");
+        Error.Reason = ErrorData->GetStringField("reason");
     }
 
     return Error;

@@ -16,10 +16,15 @@ UTranslateTextRequest::UTranslateTextRequest(const FObjectInitializer& ObjectIni
     Endpoint = Settings->GetEndpoint();
 }
 
-UTranslateTextRequest* UTranslateTextRequest::TranslateTextRequest(const FTranslateTextParams Request)
+UTranslateTextRequest* UTranslateTextRequest::TranslateTextRequest(const FTranslateTextParams Request, const FString InKeyAPI)
 {
     UTranslateTextRequest* Proxy = NewObject<UTranslateTextRequest>();
     Proxy->RequestParams = Request;
+
+    if (!InKeyAPI.IsEmpty())
+    {
+        Proxy->KeyAPI = InKeyAPI;
+    }
 
     return Proxy;
 }
@@ -52,7 +57,7 @@ void UTranslateTextRequest::OnResponseReceived(FHttpRequestPtr Request, FHttpRes
     const TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
     const TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(
         Response->GetContentAsString()
-        );
+    );
 
     const bool bSuccessResponse = Response->GetResponseCode() == 200;
 
@@ -106,7 +111,7 @@ FGoogleTranslateError UTranslateTextRequest::ParseJsonTranslateLanguageError(TSh
 
         Error.Code = ErrorData->GetNumberField("code");
         Error.Message = ErrorData->GetStringField("message");
-        Error.Status = ErrorData->GetStringField("status");
+        Error.Reason = ErrorData->GetStringField("reason");
     }
 
     return Error;
