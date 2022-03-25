@@ -99,13 +99,13 @@ public:
     FString Message;
 
     UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "TextTranslation")
-    FString Status;
+    FString Reason;
 
     FGoogleTranslateError()
     {
         Code = -1;
         Message = "None";
-        Status = "None";
+        Reason = "None";
     }
 };
 
