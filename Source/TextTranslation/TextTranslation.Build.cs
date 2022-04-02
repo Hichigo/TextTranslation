@@ -37,7 +37,7 @@ public class TextTranslation : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"Http",
+				"HTTP",
 				"Json",
 				"JsonUtilities",
 				// ... add private dependencies that you statically link with here ...	
