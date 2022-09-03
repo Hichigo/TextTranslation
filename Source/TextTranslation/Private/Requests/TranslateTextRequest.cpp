@@ -39,9 +39,9 @@ void UTranslateTextRequest::Activate()
      * but I do not know how to use the key correctly
      */
     const FString Key = "?key=" + KeyAPI;
-    const FString DetectLanguageURL = Endpoint + Key;
+    const FString TranslateURL = Endpoint + Key;
 
-    HttpRequest->SetURL(DetectLanguageURL);
+    HttpRequest->SetURL(TranslateURL);
     HttpRequest->SetVerb("POST");
     HttpRequest->SetHeader(TEXT("User-Agent"), "X-UnrealEngine-Agent");
     HttpRequest->SetHeader("Content-Type", TEXT("application/json"));
