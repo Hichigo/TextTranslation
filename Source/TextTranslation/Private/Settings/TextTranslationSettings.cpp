@@ -5,17 +5,17 @@
 
 
 UTextTranslationSettings::UTextTranslationSettings(const FObjectInitializer& ObjectInitializer)
-    : Super(ObjectInitializer),
-      Endpoint("https://translation.googleapis.com/language/translate/v2")
+    : Super(ObjectInitializer)
 {
+    GoogleAPI.Endpoint = "https://translation.googleapis.com/language/translate/v2";
 }
 
-FString UTextTranslationSettings::GetEndpoint() const
+FString UTextTranslationSettings::GetGoogleEndpoint() const
 {
-    return Endpoint;
+    return GoogleAPI.Endpoint;
 }
 
-FString UTextTranslationSettings::GetKeyAPI() const
+FString UTextTranslationSettings::GetGoogleKeyAPI() const
 {
-    return KeyAPI;
+    return GoogleAPI.KeyAPI;
 }

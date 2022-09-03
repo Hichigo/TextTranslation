@@ -13,8 +13,8 @@ UDetectLanguageRequest::UDetectLanguageRequest(const FObjectInitializer& ObjectI
 
     const UTextTranslationSettings* Settings = GetDefault<UTextTranslationSettings>();
 
-    KeyAPI = Settings->GetKeyAPI();
-    Endpoint = Settings->GetEndpoint();
+    KeyAPI = Settings->GetGoogleKeyAPI();
+    Endpoint = Settings->GetGoogleEndpoint();
 }
 
 UDetectLanguageRequest* UDetectLanguageRequest::DetectLanguageRequest(const FDetectLanguageParams Request, const FString InKeyAPI)

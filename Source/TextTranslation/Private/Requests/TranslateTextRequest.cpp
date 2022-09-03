@@ -12,8 +12,8 @@ UTranslateTextRequest::UTranslateTextRequest(const FObjectInitializer& ObjectIni
 
     const UTextTranslationSettings* Settings = GetDefault<UTextTranslationSettings>();
 
-    KeyAPI = Settings->GetKeyAPI();
-    Endpoint = Settings->GetEndpoint();
+    KeyAPI = Settings->GetGoogleKeyAPI();
+    Endpoint = Settings->GetGoogleEndpoint();
 }
 
 UTranslateTextRequest* UTranslateTextRequest::TranslateTextRequest(const FTranslateTextParams Request, const FString InKeyAPI)
