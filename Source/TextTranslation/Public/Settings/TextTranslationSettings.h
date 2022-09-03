@@ -28,9 +28,17 @@ public:
     FString GetGoogleKeyAPI() const;
     FString GetGoogleEndpoint() const;
 
-    
+    FString GetYandexKeyAPI() const;
+    FString GetYandexEndpoint() const;
+    FString GetYandexFolderID() const;
 
 private:
     UPROPERTY(Config, EditAnywhere, Category="Translate Application|Google")
     FTranslateAPI GoogleAPI;
+
+    UPROPERTY(Config, EditAnywhere, Category="Translate Application|Yandex")
+    FTranslateAPI YandexAPI;
+
+    UPROPERTY(Config, EditAnywhere, Category="Translate Application|Yandex")
+    FString FolderID;
 };
