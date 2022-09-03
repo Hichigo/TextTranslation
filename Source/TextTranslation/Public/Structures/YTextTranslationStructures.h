@@ -54,3 +54,36 @@ public:
         return ResultJsonString;
     }
 };
+
+USTRUCT(BlueprintType)
+struct FYDetectLanguageParams
+{
+    GENERATED_BODY()
+
+public:
+    UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "TextTranslation")
+    FString Text;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "YTextTranslation")
+    FString FolderID;
+
+    FYDetectLanguageParams()
+    {
+        Text = "";
+        FolderID = "";
+    }
+
+    FString GetAsJsonString() const
+    {
+        TSharedRef<FJsonObject> JsonRootObject = MakeShareable(new FJsonObject);
+        JsonRootObject->SetStringField("text", Text);
+
+        FString ResultJsonString;
+        const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&ResultJsonString);
+        FJsonSerializer::Serialize(JsonRootObject, Writer);
+
+        UE_LOG(LogTextTranslation, Warning, TEXT("Request detect language JSON string:\n%s"), *ResultJsonString)
+
+        return ResultJsonString;
+    }
+};
