@@ -2,8 +2,6 @@
 
 
 #include "Requests/YTranslateTextRequest.h"
-
-#include "SNegativeActionButton.h"
 #include "TextTranslation/Public/Settings/TextTranslationSettings.h"
 
 UYTranslateTextRequest::UYTranslateTextRequest(const FObjectInitializer& ObjectInitializer)
