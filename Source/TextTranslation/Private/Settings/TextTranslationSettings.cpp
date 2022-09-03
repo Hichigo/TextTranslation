@@ -8,7 +8,7 @@ UTextTranslationSettings::UTextTranslationSettings(const FObjectInitializer& Obj
     : Super(ObjectInitializer)
 {
     GoogleAPI.Endpoint = "https://translation.googleapis.com/language/translate/v2";
-    YandexAPI.Endpoint = "https://translate.api.cloud.yandex.net/translate/v2/translate";
+    YandexAPI.Endpoint = "https://translate.api.cloud.yandex.net/translate/v2";
 }
 
 FString UTextTranslationSettings::GetGoogleKeyAPI() const
