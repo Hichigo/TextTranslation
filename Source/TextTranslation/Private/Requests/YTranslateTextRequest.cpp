@@ -41,10 +41,12 @@ void UYTranslateTextRequest::Activate()
     TSharedRef<IHttpRequest, ESPMode::ThreadSafe> HttpRequest = Http->CreateRequest();
     HttpRequest->OnProcessRequestComplete().BindUObject(this, &UYTranslateTextRequest::OnResponseReceived);
 
-    const FString Auth = FString::Printf(TEXT("Api-Key %s"), *KeyAPI);
     RequestParams.FolderID = FolderID;
+
+    const FString Auth = FString::Printf(TEXT("Api-Key %s"), *KeyAPI);
+    const FString TranslateURL = FString::Printf(TEXT("%s/translate"), *Endpoint);
     
-    HttpRequest->SetURL(Endpoint);
+    HttpRequest->SetURL(TranslateURL);
     HttpRequest->SetVerb("POST");
     HttpRequest->SetHeader(TEXT("User-Agent"), "X-UnrealEngine-Agent");
     HttpRequest->SetHeader("Content-Type", TEXT("application/json"));
